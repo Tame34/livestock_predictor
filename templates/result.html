@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>📊 Prediction Result</h1>
+
+    <h3>Animal Details</h3>
+    <ul>
+        <li>Species: {{ species }}</li>
+        <li>Breed: {{ breed }}</li>
+        <li>Age Group: {{ age_group }}</li>
+    </ul>
+
+    <h3>Environmental Inputs</h3>
+    <ul>
+        <li>Temperature: {{ env.temperature }}°C</li>
+        <li>Humidity: {{ env.humidity }}%</li>
+        <li>Wind Speed: {{ env.wind_speed }} m/s</li>
+        <li>Solar Radiation: {{ env.solar_radiation }} W/m²</li>
+    </ul>
+
+    <h3>Predicted Metrics</h3>
+    <ul>
+        <li>Heat Stress Level: {{ predictions.Heat_Stress_Level }}</li>
+        <li>Body Temperature: {{ predictions.Body_Temperature_C }} °C</li>
+        <li>Respiration Rate: {{ predictions.Respiration_Rate_bpm }} bpm</li>
+        <li>Cooling Effect: {{ predictions.Cooling_Effect }}</li>
+    </ul>
+
+    <h3>💡 Advice</h3>
+    <p>{{ advice }}</p>
+
+    <a href="/">🔙 Try Another Prediction</a>
+</body>
+</html>

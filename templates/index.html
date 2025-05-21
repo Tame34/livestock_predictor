@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Livestock Heat Stress Predictor</title>
+</head>
+<body>
+    <h1>🐄 Livestock Heat Stress Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="species">Select Species:</label>
+        <select name="species" id="species" onchange="updateForm()">
+            {% for s in species_options %}
+                <option value="{{ s }}">{{ s.capitalize() }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="breed">Breed:</label>
+        <select name="breed" id="breed"></select><br><br>
+
+        <label for="age_group">Age Group:</label>
+        <select name="age_group" id="age_group"></select><br><br>
+
+        <h3>🌦 Environmental Conditions</h3>
+        <label>Temperature (°C):</label><br>
+        <input type="number" name="temperature" min="10" max="50" step="0.1" required><br><br>
+
+        <label>Humidity (%):</label><br>
+        <input type="number" name="humidity" min="0" max="100" step="0.1" required><br><br>
+
+        <label>Wind Speed (m/s):</label><br>
+        <input type="number" name="wind_speed" min="0" max="20" step="0.1" required><br><br>
+
+        <label>Solar Radiation (W/m²):</label><br>
+        <input type="number" name="solar_radiation" min="0" max="1200" step="1" required><br><br>
+
+        <button type="submit">Predict Stress Level</button>
+    </form>
+
+    <script>
+        const breeds = {{ breeds | tojson }};
+        const ages = {{ ages | tojson }};
+
+        function updateForm() {
+            const species = document.getElementById("species").value;
+
+            const breedSelect = document.getElementById("breed");
+            const ageSelect = document.getElementById("age_group");
+            breedSelect.innerHTML = "";
+            ageSelect.innerHTML = "";
+
+            breeds[species].forEach(b => {
+                const option = document.createElement("option");
+                option.value = b;
+                option.textContent = b;
+                breedSelect.appendChild(option);
+            });
+
+            ages[species].forEach(a => {
+                const option = document.createElement("option");
+                option.value = a;
+                option.textContent = a;
+                ageSelect.appendChild(option);
+            });
+        }
+
+        window.onload = updateForm;
+    </script>
+</body>
+</html>
